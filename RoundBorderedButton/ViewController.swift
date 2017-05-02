@@ -9,14 +9,11 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-    @IBOutlet weak var button: RoundBorderedButton!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    @IBAction func tappedButton(_ sender: RoundBorderedButton) {
+    @IBAction func tapped(_ button: RoundBorderedButton) {
         button.isSelected = !button.isSelected
     }
 }

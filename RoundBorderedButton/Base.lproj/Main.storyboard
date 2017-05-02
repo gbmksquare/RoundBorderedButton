@@ -1,7 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -13,35 +19,121 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1I7-Yb-zFn" customClass="RoundBorderedButton" customModule="RoundBorderedButton" customModuleProvider="target">
-                                <rect key="frame" x="250" y="250" width="100" height="100"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="tintColor" red="0.36209025979999998" green="0.66359049079999999" blue="0.82483834030000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="258" y="60" width="100" height="100"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.36209025979999998" green="0.66359049079999999" blue="0.82483834030000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="IaQ-L3-xzo"/>
-                                    <constraint firstAttribute="width" constant="100" id="Vmh-M8-YLg"/>
+                                    <constraint firstAttribute="width" secondItem="1I7-Yb-zFn" secondAttribute="height" multiplier="1:1" id="hKF-ec-gLi"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="DANGER"/>
                                     <userDefinedRuntimeAttribute type="image" keyPath="image" value="glypish-914-skull-and-crossbones"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="tappedButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JjC-kL-j2p"/>
+                                    <action selector="tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3ah-py-05D"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UER-44-u6e" customClass="RoundBorderedButton" customModule="RoundBorderedButton" customModuleProvider="target">
+                                <rect key="frame" x="17.5" y="60" width="100" height="100"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.36209025979999998" green="0.66359049079999999" blue="0.82483834030000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="UER-44-u6e" secondAttribute="height" multiplier="1:1" id="T0z-gJ-oif"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="glypish-914-skull-and-crossbones"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BXs-nA-dE6"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bVf-F3-Suk" customClass="RoundBorderedButton" customModule="RoundBorderedButton" customModuleProvider="target">
+                                <rect key="frame" x="137.5" y="60" width="100" height="100"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.36209025979999998" green="0.66359049079999999" blue="0.82483834030000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="bVf-F3-Suk" secondAttribute="height" multiplier="1:1" id="Kc6-Aw-XQz"/>
+                                    <constraint firstAttribute="width" constant="100" id="edx-Gi-gIJ"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="DANGER"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DzN-WC-xxJ"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QVK-l5-I2G" customClass="RoundBorderedButton" customModule="RoundBorderedButton" customModuleProvider="target">
+                                <rect key="frame" x="238" y="220" width="60" height="60"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.36209025979999998" green="0.66359049079999999" blue="0.82483834030000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="QVK-l5-I2G" secondAttribute="height" multiplier="1:1" id="JUq-Pg-CGY"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="DANGER"/>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="glypish-914-skull-and-crossbones"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TWA-Or-Zjf"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7bi-vh-ptY" customClass="RoundBorderedButton" customModule="RoundBorderedButton" customModuleProvider="target">
+                                <rect key="frame" x="78" y="220" width="60" height="60"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.36209025979999998" green="0.66359049079999999" blue="0.82483834030000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="7bi-vh-ptY" secondAttribute="height" multiplier="1:1" id="qGR-zp-Ruh"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="glypish-914-skull-and-crossbones"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FrR-t6-Bd8"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gSa-mS-nxS" customClass="RoundBorderedButton" customModule="RoundBorderedButton" customModuleProvider="target">
+                                <rect key="frame" x="158" y="220" width="60" height="60"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.36209025979999998" green="0.66359049079999999" blue="0.82483834030000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="gSa-mS-nxS" secondAttribute="height" multiplier="1:1" id="1ak-Ao-bGh"/>
+                                    <constraint firstAttribute="width" constant="60" id="NMk-Gy-ZrA"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="DANGER"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="S6h-Ib-vkk"/>
                                 </connections>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="1I7-Yb-zFn" secondAttribute="centerX" id="BXu-Sj-fxH"/>
-                            <constraint firstAttribute="centerY" secondItem="1I7-Yb-zFn" secondAttribute="centerY" id="PN1-em-cDc"/>
+                            <constraint firstItem="1I7-Yb-zFn" firstAttribute="leading" secondItem="bVf-F3-Suk" secondAttribute="trailing" constant="20" id="1Gj-cc-GRb"/>
+                            <constraint firstItem="bVf-F3-Suk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4LR-ub-QqW"/>
+                            <constraint firstItem="7bi-vh-ptY" firstAttribute="width" secondItem="7bi-vh-ptY" secondAttribute="height" multiplier="1:1" id="7HH-rt-v0o"/>
+                            <constraint firstItem="QVK-l5-I2G" firstAttribute="leading" secondItem="gSa-mS-nxS" secondAttribute="trailing" constant="20" id="7bu-97-b2F"/>
+                            <constraint firstItem="gSa-mS-nxS" firstAttribute="width" secondItem="7bi-vh-ptY" secondAttribute="width" id="Al4-wq-jC8"/>
+                            <constraint firstItem="1I7-Yb-zFn" firstAttribute="top" secondItem="UER-44-u6e" secondAttribute="top" id="CUi-fJ-s5f"/>
+                            <constraint firstItem="QVK-l5-I2G" firstAttribute="width" secondItem="7bi-vh-ptY" secondAttribute="width" id="EEW-Mm-rpH"/>
+                            <constraint firstItem="QVK-l5-I2G" firstAttribute="top" secondItem="7bi-vh-ptY" secondAttribute="top" id="Gwz-G8-fut"/>
+                            <constraint firstItem="gSa-mS-nxS" firstAttribute="leading" secondItem="7bi-vh-ptY" secondAttribute="trailing" constant="20" id="H6H-K3-Ka9"/>
+                            <constraint firstItem="gSa-mS-nxS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Rrp-Wo-NFe"/>
+                            <constraint firstItem="bVf-F3-Suk" firstAttribute="top" secondItem="UER-44-u6e" secondAttribute="top" id="Wts-wU-weI"/>
+                            <constraint firstItem="gSa-mS-nxS" firstAttribute="top" secondItem="bVf-F3-Suk" secondAttribute="bottom" constant="60" id="XYS-zd-FS2"/>
+                            <constraint firstItem="QVK-l5-I2G" firstAttribute="width" secondItem="QVK-l5-I2G" secondAttribute="height" multiplier="1:1" id="YZy-8o-zqH"/>
+                            <constraint firstItem="gSa-mS-nxS" firstAttribute="width" secondItem="gSa-mS-nxS" secondAttribute="height" multiplier="1:1" id="axO-Tc-uL2"/>
+                            <constraint firstItem="bVf-F3-Suk" firstAttribute="leading" secondItem="UER-44-u6e" secondAttribute="trailing" constant="20" id="cdh-wq-FAW"/>
+                            <constraint firstItem="bVf-F3-Suk" firstAttribute="width" secondItem="UER-44-u6e" secondAttribute="width" id="cm6-lh-2gZ"/>
+                            <constraint firstItem="bVf-F3-Suk" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="40" id="jHO-oI-7bm"/>
+                            <constraint firstItem="1I7-Yb-zFn" firstAttribute="width" secondItem="UER-44-u6e" secondAttribute="width" id="ue4-eP-EQC"/>
+                            <constraint firstItem="gSa-mS-nxS" firstAttribute="top" secondItem="7bi-vh-ptY" secondAttribute="top" id="ykU-W7-nuK"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="button" destination="1I7-Yb-zFn" id="GVa-eO-OIC"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
