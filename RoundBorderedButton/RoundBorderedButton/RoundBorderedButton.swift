@@ -10,7 +10,7 @@ import UIKit
 
 @IBDesignable class RoundBorderedButton: UIControl {
     // MARK: Default value
-    private static let defaultBorderWidth: CGFloat = 2
+    fileprivate static let defaultBorderWidth: CGFloat = 2
     
     // MARK: Property
     @IBInspectable var title: String? {
@@ -34,7 +34,7 @@ import UIKit
         super.init(frame: frame)
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -48,15 +48,15 @@ import UIKit
     }
     
     // MARK: Button
-    private var buttonView: UIView?
+    fileprivate var buttonView: UIView?
     var titleLabel: UILabel?
     var imageView: UIImageView?
     
-    private func addButtonView() {
-        let button = UIView(frame: CGRectZero)
-        button.backgroundColor = UIColor.clearColor()
+    fileprivate func addButtonView() {
+        let button = UIView(frame: CGRect.zero)
+        button.backgroundColor = UIColor.clear
         button.layer.borderWidth = borderWidth
-        button.layer.borderColor = tintColor.CGColor
+        button.layer.borderColor = tintColor.cgColor
         button.layer.cornerRadius = bounds.width / 2
         addSubview(button)
         buttonView = button
@@ -65,7 +65,7 @@ import UIKit
         layoutIfNeeded()
     }
     
-    private func addTitleAndImageView() {
+    fileprivate func addTitleAndImageView() {
         removeSubviewsFor(buttonView!)
         
         switch (title, image) {
@@ -90,7 +90,7 @@ import UIKit
         }
         
         addSelectedView()
-        if selected == true {
+        if isSelected == true {
             showSelectedView()
         } else {
             hideSelectedView()
@@ -103,34 +103,34 @@ import UIKit
     override func tintColorDidChange() {
         super.tintColorDidChange()
         
-        buttonView?.layer.borderColor = tintColor.CGColor
+        buttonView?.layer.borderColor = tintColor.cgColor
         titleLabel?.textColor = tintColor
     }
     
     // MARK: Touch
-    override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
-        if self.pointInside(point, withEvent: event) == true {
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        if self.point(inside: point, with: event) == true {
             return self
         } else {
-            return super.hitTest(point, withEvent: event)
+            return super.hitTest(point, with: event)
         }
     }
     
     // MARK: Selected state
-    private var selectedBackgroundView: UIView?
-    private var selectedContainerView: UIView?
-    private var selectedTitleLabel: UILabel?
-    private var selectedImageView: UIImageView?
-    private var selectedContainerMaskView: UIView?
+    fileprivate var selectedBackgroundView: UIView?
+    fileprivate var selectedContainerView: UIView?
+    fileprivate var selectedTitleLabel: UILabel?
+    fileprivate var selectedImageView: UIImageView?
+    fileprivate var selectedContainerMaskView: UIView?
     
-    private var showSelectedViewDuration = 0.75
-    private var showSelectedViewDamping: CGFloat = 0.6
-    private var showSelectedViewVelocity: CGFloat = 0.9
-    private var hideSelectedViewDuration = 0.3
-    private var hideSelectedViewDamping: CGFloat = 0.9
-    private var hideSelectedViewVelocity: CGFloat = 0.9
+    fileprivate var showSelectedViewDuration = 0.75
+    fileprivate var showSelectedViewDamping: CGFloat = 0.6
+    fileprivate var showSelectedViewVelocity: CGFloat = 0.9
+    fileprivate var hideSelectedViewDuration = 0.3
+    fileprivate var hideSelectedViewDamping: CGFloat = 0.9
+    fileprivate var hideSelectedViewVelocity: CGFloat = 0.9
     
-    override var selected: Bool {
+    override var isSelected: Bool {
         willSet {
             if newValue == true {
                 showSelectedView()
@@ -140,9 +140,9 @@ import UIKit
         }
     }
     
-    private func addSelectedView() {
+    fileprivate func addSelectedView() {
         func addSelectedBacgroundView() {
-            let selectedBackgroundView = UIView(frame: CGRectZero)
+            let selectedBackgroundView = UIView(frame: CGRect.zero)
             selectedBackgroundView.backgroundColor = tintColor
             selectedBackgroundView.layer.cornerRadius = bounds.width / 2
             buttonView?.addSubview(selectedBackgroundView)
@@ -153,7 +153,7 @@ import UIKit
         
         func addSelectedContainerView() {
             let selectedContainerMaskView = UIView(frame: buttonView!.bounds)
-            selectedContainerMaskView.backgroundColor = UIColor.blackColor()
+            selectedContainerMaskView.backgroundColor = UIColor.black
             selectedContainerMaskView.layer.cornerRadius = buttonView!.bounds.width / 2
             self.selectedContainerMaskView = selectedContainerMaskView
             
@@ -163,8 +163,8 @@ import UIKit
             
             let selectedContainerView = UIView(frame: buttonView!.bounds)
             selectedContainerView.tag = 1
-            selectedContainerView.backgroundColor = UIColor.clearColor()
-            selectedContainerView.maskView = selectedContainerMaskView
+            selectedContainerView.backgroundColor = UIColor.clear
+            selectedContainerView.mask = selectedContainerMaskView
             buttonView?.addSubview(selectedContainerView)
             self.selectedContainerView = selectedContainerView
             
@@ -175,16 +175,16 @@ import UIKit
             case (nil, nil): return
             case (_, nil):
                 let titleLabel = addTitleViewTo(selectedContainerView)
-                titleLabel.textColor = UIColor.whiteColor()
+                titleLabel.textColor = UIColor.white
                 self.selectedTitleLabel = titleLabel
             case (nil, _):
                 let imageView = addImageViewTo(selectedContainerView)
-                imageView.tintColor = UIColor.whiteColor()
+                imageView.tintColor = UIColor.white
                 self.imageView = imageView
             case (_, _):
                 let subviews = addTitleAndImageViewTo(selectedContainerView)
-                subviews.titleLabel.textColor = UIColor.whiteColor()
-                subviews.imageView.tintColor = UIColor.whiteColor()
+                subviews.titleLabel.textColor = UIColor.white
+                subviews.imageView.tintColor = UIColor.white
                 self.titleLabel = subviews.titleLabel
                 self.imageView = subviews.imageView
             default: return
@@ -197,73 +197,73 @@ import UIKit
         addSelectedContainerView()
     }
     
-    private func captureTitleAndImageView() -> UIImage? {
-        titleLabel?.textColor = UIColor.whiteColor()
-        imageView?.tintColor = UIColor.whiteColor()
-        buttonView?.layer.borderColor = UIColor.clearColor().CGColor
+    fileprivate func captureTitleAndImageView() -> UIImage? {
+        titleLabel?.textColor = UIColor.white
+        imageView?.tintColor = UIColor.white
+        buttonView?.layer.borderColor = UIColor.clear.cgColor
         
         UIGraphicsBeginImageContextWithOptions(buttonView!.bounds.size, false, 0)
-        buttonView?.drawViewHierarchyInRect(buttonView!.bounds, afterScreenUpdates: true)
-        titleLabel?.drawViewHierarchyInRect(buttonView!.bounds, afterScreenUpdates: true)
-        imageView?.drawViewHierarchyInRect(buttonView!.bounds, afterScreenUpdates: true)
+        buttonView?.drawHierarchy(in: buttonView!.bounds, afterScreenUpdates: true)
+        titleLabel?.drawHierarchy(in: buttonView!.bounds, afterScreenUpdates: true)
+        imageView?.drawHierarchy(in: buttonView!.bounds, afterScreenUpdates: true)
         let snapshot = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
         titleLabel?.textColor = tintColor
         imageView?.tintColor = tintColor
-        buttonView?.layer.borderColor = tintColor.CGColor
+        buttonView?.layer.borderColor = tintColor.cgColor
         
          return snapshot
     }
     
-    private func setSelectedViewToVisibleState() {
+    fileprivate func setSelectedViewToVisibleState() {
         selectedBackgroundView?.alpha = 1
-        selectedBackgroundView?.transform = CGAffineTransformIdentity
-        selectedContainerMaskView?.transform = CGAffineTransformIdentity
-        selectedContainerView?.hidden = false
+        selectedBackgroundView?.transform = CGAffineTransform.identity
+        selectedContainerMaskView?.transform = CGAffineTransform.identity
+        selectedContainerView?.isHidden = false
     }
     
-    private func setSelectedViewToHiddenState() {
+    fileprivate func setSelectedViewToHiddenState() {
         selectedBackgroundView?.alpha = 0
-        selectedBackgroundView?.transform = CGAffineTransformMakeScale(0.01, 0.01)
-        selectedContainerMaskView?.transform = CGAffineTransformMakeScale(0.01, 0.01)
-        selectedContainerView?.hidden = true
+        selectedBackgroundView?.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+        selectedContainerMaskView?.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+        selectedContainerView?.isHidden = true
     }
     
-    private func showSelectedView() {
+    fileprivate func showSelectedView() {
         setSelectedViewToHiddenState()
-        userInteractionEnabled = false
+        isUserInteractionEnabled = false
         
-        UIView.animateWithDuration(showSelectedViewDuration, delay: 0,
+        UIView.animate(withDuration: showSelectedViewDuration, delay: 0,
             usingSpringWithDamping: showSelectedViewDamping, initialSpringVelocity: showSelectedViewVelocity,
-            options: UIViewAnimationOptions.CurveLinear,
+            options: UIViewAnimationOptions.curveLinear,
             animations: { () -> Void in
                 self.setSelectedViewToVisibleState()
         }) { (finished) -> Void in
-            self.userInteractionEnabled = true
+            self.isUserInteractionEnabled = true
         }
     }
     
-    private func hideSelectedView() {
+    fileprivate func hideSelectedView() {
         setSelectedViewToVisibleState()
-        userInteractionEnabled = false
+        isUserInteractionEnabled = false
         
-        UIView.animateWithDuration(hideSelectedViewDuration, delay: 0,
+        UIView.animate(withDuration: hideSelectedViewDuration, delay: 0,
             usingSpringWithDamping: hideSelectedViewDamping, initialSpringVelocity: hideSelectedViewVelocity,
-            options: UIViewAnimationOptions.CurveLinear,
+            options: UIViewAnimationOptions.curveLinear,
             animations: { () -> Void in
                 self.setSelectedViewToHiddenState()
         }) { (finished) -> Void in
-            self.userInteractionEnabled = true
+            self.isUserInteractionEnabled = true
         }
     }
     
     // MARK: Add subview helper
-    func addTitleViewTo(superview: UIView) -> UILabel {
-        let titleLabel = UILabel(frame: CGRectZero)
+    func addTitleViewTo(_ superview: UIView) -> UILabel {
+        let titleLabel = UILabel(frame: CGRect.zero)
         titleLabel.text = title
         titleLabel.textColor = tintColor
-        titleLabel.textAlignment = NSTextAlignment.Center
+        titleLabel.textAlignment = NSTextAlignment.center
         superview.addSubview(titleLabel)
         
         addConstraintsFor(titleLabel, toEqualSizeOf: buttonView!)
@@ -271,10 +271,10 @@ import UIKit
         return titleLabel
     }
     
-    func addImageViewTo(superview: UIView) -> UIImageView {
-        let imageView = UIImageView(frame: CGRectZero)
+    func addImageViewTo(_ superview: UIView) -> UIImageView {
+        let imageView = UIImageView(frame: CGRect.zero)
         imageView.image = image
-        imageView.contentMode = UIViewContentMode.Center
+        imageView.contentMode = UIViewContentMode.center
         imageView.clipsToBounds = true
         superview.addSubview(imageView)
         
@@ -283,10 +283,10 @@ import UIKit
         return imageView
     }
     
-    func addTitleAndImageViewTo(superview: UIView) -> (containerView: UIView, titleLabel: UILabel, imageView: UIImageView) {
-        let containerView = UIView(frame: CGRectZero)
+    func addTitleAndImageViewTo(_ superview: UIView) -> (containerView: UIView, titleLabel: UILabel, imageView: UIImageView) {
+        let containerView = UIView(frame: CGRect.zero)
         containerView.tag = 1
-        containerView.backgroundColor = UIColor.clearColor()
+        containerView.backgroundColor = UIColor.clear
         superview.addSubview(containerView)
         
         addConstraintFor(containerView, toFitInsideRound: buttonView!)
@@ -294,15 +294,15 @@ import UIKit
         
         let containerWidth = sqrt(2) / 2 * bounds.width
         
-        let titleLabel = UILabel(frame: CGRectZero)
+        let titleLabel = UILabel(frame: CGRect.zero)
         titleLabel.text = title
         titleLabel.textColor = tintColor
-        titleLabel.textAlignment = NSTextAlignment.Center
+        titleLabel.textAlignment = NSTextAlignment.center
         containerView.addSubview(titleLabel)
         
-        let imageView = UIImageView(frame: CGRectZero)
+        let imageView = UIImageView(frame: CGRect.zero)
         imageView.image = image
-        imageView.contentMode = UIViewContentMode.Center
+        imageView.contentMode = UIViewContentMode.center
         imageView.clipsToBounds = true
         containerView.addSubview(imageView)
         
@@ -311,7 +311,7 @@ import UIKit
         return (containerView, titleLabel, imageView)
     }
     
-    func removeSubviewsFor(view: UIView) {
+    func removeSubviewsFor(_ view: UIView) {
         for view in view.subviews {
             if view.tag == 1 {
                 for subview in view.subviews {
@@ -327,97 +327,97 @@ import UIKit
     }
     
     // MARK: Auto layout helper
-    private func addConstraintsFor(subview: UIView, toEqualSizeOf superview: UIView) {
-        let topConstraint = NSLayoutConstraint(item: subview, attribute: NSLayoutAttribute.Top,
-            relatedBy: NSLayoutRelation.Equal,
-            toItem: superview, attribute: NSLayoutAttribute.Top,
+    fileprivate func addConstraintsFor(_ subview: UIView, toEqualSizeOf superview: UIView) {
+        let topConstraint = NSLayoutConstraint(item: subview, attribute: NSLayoutAttribute.top,
+            relatedBy: NSLayoutRelation.equal,
+            toItem: superview, attribute: NSLayoutAttribute.top,
             multiplier: 1, constant: 0)
-        let bottomConstraint = NSLayoutConstraint(item: subview, attribute: NSLayoutAttribute.Bottom,
-            relatedBy: NSLayoutRelation.Equal,
-            toItem: superview, attribute: NSLayoutAttribute.Bottom,
+        let bottomConstraint = NSLayoutConstraint(item: subview, attribute: NSLayoutAttribute.bottom,
+            relatedBy: NSLayoutRelation.equal,
+            toItem: superview, attribute: NSLayoutAttribute.bottom,
             multiplier: 1, constant: 0)
-        let leftConstraint = NSLayoutConstraint(item: subview, attribute: NSLayoutAttribute.Left,
-            relatedBy: NSLayoutRelation.Equal,
-            toItem: superview, attribute: NSLayoutAttribute.Left,
+        let leftConstraint = NSLayoutConstraint(item: subview, attribute: NSLayoutAttribute.left,
+            relatedBy: NSLayoutRelation.equal,
+            toItem: superview, attribute: NSLayoutAttribute.left,
             multiplier: 1, constant: 0)
-        let rightConstraint = NSLayoutConstraint(item: subview, attribute: NSLayoutAttribute.Right,
-            relatedBy: NSLayoutRelation.Equal,
-            toItem: superview, attribute: NSLayoutAttribute.Right,
+        let rightConstraint = NSLayoutConstraint(item: subview, attribute: NSLayoutAttribute.right,
+            relatedBy: NSLayoutRelation.equal,
+            toItem: superview, attribute: NSLayoutAttribute.right,
             multiplier: 1, constant: 0)
-        subview.setTranslatesAutoresizingMaskIntoConstraints(false)
+        subview.translatesAutoresizingMaskIntoConstraints = false
         superview.addConstraints([topConstraint, bottomConstraint, leftConstraint, rightConstraint])
     }
     
-    private func addConstraintsFor(subview: UIView, toFitInside superview: UIView) {
+    fileprivate func addConstraintsFor(_ subview: UIView, toFitInside superview: UIView) {
         let fittingWidth = superview.bounds.width > superview.bounds.height ? superview.bounds.height : superview.bounds.width
         addConstraintFor(subview, toFitInsde: superview, width: fittingWidth)
     }
     
-    private func addConstraintFor(subview: UIView, toFitInsideRound superview: UIView) {
+    fileprivate func addConstraintFor(_ subview: UIView, toFitInsideRound superview: UIView) {
         let fittingWidth = sqrt(2) / 2 * superview.bounds.width
         addConstraintFor(subview, toFitInsde: superview, width: fittingWidth)
     }
     
-    private func addConstraintFor(subview: UIView, toFitInsde superview: UIView, width: CGFloat) {
-        let widthConstraint = NSLayoutConstraint(item: subview, attribute: NSLayoutAttribute.Width,
-            relatedBy: NSLayoutRelation.Equal,
-            toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute,
+    fileprivate func addConstraintFor(_ subview: UIView, toFitInsde superview: UIView, width: CGFloat) {
+        let widthConstraint = NSLayoutConstraint(item: subview, attribute: NSLayoutAttribute.width,
+            relatedBy: NSLayoutRelation.equal,
+            toItem: nil, attribute: NSLayoutAttribute.notAnAttribute,
             multiplier: 1, constant: width)
-        let ratioConstraint = NSLayoutConstraint(item: subview, attribute: NSLayoutAttribute.Height,
-            relatedBy: NSLayoutRelation.Equal,
-            toItem: subview, attribute: NSLayoutAttribute.Width,
+        let ratioConstraint = NSLayoutConstraint(item: subview, attribute: NSLayoutAttribute.height,
+            relatedBy: NSLayoutRelation.equal,
+            toItem: subview, attribute: NSLayoutAttribute.width,
             multiplier: 1, constant: 0)
-        let verticalConstraint = NSLayoutConstraint(item: subview, attribute: NSLayoutAttribute.CenterY,
-            relatedBy: NSLayoutRelation.Equal,
-            toItem: superview, attribute: NSLayoutAttribute.CenterY,
+        let verticalConstraint = NSLayoutConstraint(item: subview, attribute: NSLayoutAttribute.centerY,
+            relatedBy: NSLayoutRelation.equal,
+            toItem: superview, attribute: NSLayoutAttribute.centerY,
             multiplier: 1, constant: 0)
-        let horizontalConstraint = NSLayoutConstraint(item: subview, attribute: NSLayoutAttribute.CenterX,
-            relatedBy: NSLayoutRelation.Equal,
-            toItem: superview, attribute: NSLayoutAttribute.CenterX,
+        let horizontalConstraint = NSLayoutConstraint(item: subview, attribute: NSLayoutAttribute.centerX,
+            relatedBy: NSLayoutRelation.equal,
+            toItem: superview, attribute: NSLayoutAttribute.centerX,
             multiplier: 1, constant: 0)
-        subview.setTranslatesAutoresizingMaskIntoConstraints(false)
+        subview.translatesAutoresizingMaskIntoConstraints = false
         superview.addConstraints([widthConstraint, ratioConstraint, verticalConstraint, horizontalConstraint])
     }
     
-    private func addConstraintFor(upperSubview: UIView, lowerSubview: UIView, superview: UIView, lowerViewRatio: CGFloat) {
+    fileprivate func addConstraintFor(_ upperSubview: UIView, lowerSubview: UIView, superview: UIView, lowerViewRatio: CGFloat) {
         let lowerViewHeight = superview.bounds.height * lowerViewRatio
         
-        let upperViewTopConstraint = NSLayoutConstraint(item: upperSubview, attribute: NSLayoutAttribute.Top,
-            relatedBy: NSLayoutRelation.Equal,
-            toItem: superview, attribute: NSLayoutAttribute.Top,
+        let upperViewTopConstraint = NSLayoutConstraint(item: upperSubview, attribute: NSLayoutAttribute.top,
+            relatedBy: NSLayoutRelation.equal,
+            toItem: superview, attribute: NSLayoutAttribute.top,
             multiplier: 1, constant: 0)
-        let upperViewBottomConstraint = NSLayoutConstraint(item: upperSubview, attribute: NSLayoutAttribute.Bottom,
-            relatedBy: NSLayoutRelation.Equal,
-            toItem: lowerSubview, attribute: NSLayoutAttribute.Top,
+        let upperViewBottomConstraint = NSLayoutConstraint(item: upperSubview, attribute: NSLayoutAttribute.bottom,
+            relatedBy: NSLayoutRelation.equal,
+            toItem: lowerSubview, attribute: NSLayoutAttribute.top,
             multiplier: 1, constant: 0)
-        let upperViewLeftConstraint = NSLayoutConstraint(item: upperSubview, attribute: NSLayoutAttribute.Left,
-            relatedBy: NSLayoutRelation.Equal,
-            toItem: superview, attribute: NSLayoutAttribute.Left,
+        let upperViewLeftConstraint = NSLayoutConstraint(item: upperSubview, attribute: NSLayoutAttribute.left,
+            relatedBy: NSLayoutRelation.equal,
+            toItem: superview, attribute: NSLayoutAttribute.left,
             multiplier: 1, constant: 0)
-        let upperViewRightConstraint = NSLayoutConstraint(item: upperSubview, attribute: NSLayoutAttribute.Right,
-            relatedBy: NSLayoutRelation.Equal,
-            toItem: superview, attribute: NSLayoutAttribute.Right,
+        let upperViewRightConstraint = NSLayoutConstraint(item: upperSubview, attribute: NSLayoutAttribute.right,
+            relatedBy: NSLayoutRelation.equal,
+            toItem: superview, attribute: NSLayoutAttribute.right,
             multiplier: 1, constant: 0)
-        upperSubview.setTranslatesAutoresizingMaskIntoConstraints(false)
+        upperSubview.translatesAutoresizingMaskIntoConstraints = false
         superview.addConstraints([upperViewTopConstraint, upperViewBottomConstraint, upperViewLeftConstraint, upperViewRightConstraint])
         
-        let lowerViewHeightConstraint = NSLayoutConstraint(item: lowerSubview, attribute: NSLayoutAttribute.Height,
-            relatedBy: NSLayoutRelation.Equal,
-            toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute,
+        let lowerViewHeightConstraint = NSLayoutConstraint(item: lowerSubview, attribute: NSLayoutAttribute.height,
+            relatedBy: NSLayoutRelation.equal,
+            toItem: nil, attribute: NSLayoutAttribute.notAnAttribute,
             multiplier: 1, constant: lowerViewHeight)
-        let lowerViewBottomConstraint = NSLayoutConstraint(item: lowerSubview, attribute: NSLayoutAttribute.Bottom,
-            relatedBy: NSLayoutRelation.Equal,
-            toItem: superview, attribute: NSLayoutAttribute.Bottom,
+        let lowerViewBottomConstraint = NSLayoutConstraint(item: lowerSubview, attribute: NSLayoutAttribute.bottom,
+            relatedBy: NSLayoutRelation.equal,
+            toItem: superview, attribute: NSLayoutAttribute.bottom,
             multiplier: 1, constant: 0)
-        let lowerViewLeftConstraint = NSLayoutConstraint(item: lowerSubview, attribute: NSLayoutAttribute.Left,
-            relatedBy: NSLayoutRelation.Equal,
-            toItem: superview, attribute: NSLayoutAttribute.Left,
+        let lowerViewLeftConstraint = NSLayoutConstraint(item: lowerSubview, attribute: NSLayoutAttribute.left,
+            relatedBy: NSLayoutRelation.equal,
+            toItem: superview, attribute: NSLayoutAttribute.left,
             multiplier: 1, constant: 0)
-        let lowerViewRightConstraint = NSLayoutConstraint(item: lowerSubview, attribute: NSLayoutAttribute.Right,
-            relatedBy: NSLayoutRelation.Equal,
-            toItem: superview, attribute: NSLayoutAttribute.Right,
+        let lowerViewRightConstraint = NSLayoutConstraint(item: lowerSubview, attribute: NSLayoutAttribute.right,
+            relatedBy: NSLayoutRelation.equal,
+            toItem: superview, attribute: NSLayoutAttribute.right,
             multiplier: 1, constant: 0)
-        lowerSubview.setTranslatesAutoresizingMaskIntoConstraints(false)
+        lowerSubview.translatesAutoresizingMaskIntoConstraints = false
         superview.addConstraints([lowerViewHeightConstraint, lowerViewBottomConstraint, lowerViewLeftConstraint, lowerViewRightConstraint])
     }
 }

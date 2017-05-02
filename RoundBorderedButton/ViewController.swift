@@ -16,8 +16,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    @IBAction func tappedButton(sender: RoundBorderedButton) {
-        button.selected = !button.selected
+    @IBAction func tappedButton(_ sender: RoundBorderedButton) {
+        button.isSelected = !button.isSelected
     }
 }
 

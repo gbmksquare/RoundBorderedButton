@@ -8,8 +8,8 @@ A simple button subclassing UIControl with spring animations when selected.
 
 ## Requirements
 
-* Swift 1.2
-* Xcode 6.3
+* Swift 3
+* Xcode 8
 
 ## License
 
