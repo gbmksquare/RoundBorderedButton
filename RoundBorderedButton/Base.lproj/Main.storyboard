@@ -25,7 +25,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1I7-Yb-zFn" customClass="RoundBorderedButton" customModule="RoundBorderedButton" customModuleProvider="target">
                                 <rect key="frame" x="258" y="60" width="100" height="100"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="tintColor" red="0.36209025979999998" green="0.66359049079999999" blue="0.82483834030000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.57254901960000004" green="0.87450980389999999" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="1I7-Yb-zFn" secondAttribute="height" multiplier="1:1" id="hKF-ec-gLi"/>
                                 </constraints>
@@ -40,7 +40,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UER-44-u6e" customClass="RoundBorderedButton" customModule="RoundBorderedButton" customModuleProvider="target">
                                 <rect key="frame" x="17.5" y="60" width="100" height="100"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="tintColor" red="0.36209025979999998" green="0.66359049079999999" blue="0.82483834030000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.92549020049999997" green="0.23529411850000001" blue="0.1019607857" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="UER-44-u6e" secondAttribute="height" multiplier="1:1" id="T0z-gJ-oif"/>
                                 </constraints>
@@ -69,7 +69,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QVK-l5-I2G" customClass="RoundBorderedButton" customModule="RoundBorderedButton" customModuleProvider="target">
                                 <rect key="frame" x="238" y="220" width="60" height="60"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="tintColor" red="0.36209025979999998" green="0.66359049079999999" blue="0.82483834030000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.57254904510000004" green="0.0" blue="0.23137255009999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="QVK-l5-I2G" secondAttribute="height" multiplier="1:1" id="JUq-Pg-CGY"/>
                                 </constraints>
@@ -84,7 +84,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7bi-vh-ptY" customClass="RoundBorderedButton" customModule="RoundBorderedButton" customModuleProvider="target">
                                 <rect key="frame" x="78" y="220" width="60" height="60"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="tintColor" red="0.36209025979999998" green="0.66359049079999999" blue="0.82483834030000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.94509803920000002" green="0.36470588240000001" blue="0.36470588240000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="7bi-vh-ptY" secondAttribute="height" multiplier="1:1" id="qGR-zp-Ruh"/>
                                 </constraints>
@@ -98,7 +98,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gSa-mS-nxS" customClass="RoundBorderedButton" customModule="RoundBorderedButton" customModuleProvider="target">
                                 <rect key="frame" x="158" y="220" width="60" height="60"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="tintColor" red="0.36209025979999998" green="0.66359049079999999" blue="0.82483834030000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.40784313729999999" green="0.75686274509999996" blue="0.74117647060000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="gSa-mS-nxS" secondAttribute="height" multiplier="1:1" id="1ak-Ao-bGh"/>
                                     <constraint firstAttribute="width" constant="60" id="NMk-Gy-ZrA"/>
@@ -134,6 +134,14 @@
                             <constraint firstItem="gSa-mS-nxS" firstAttribute="top" secondItem="7bi-vh-ptY" secondAttribute="top" id="ykU-W7-nuK"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="button1" destination="UER-44-u6e" id="OPl-PN-N40"/>
+                        <outlet property="button2" destination="bVf-F3-Suk" id="Is7-EX-G3e"/>
+                        <outlet property="button3" destination="1I7-Yb-zFn" id="Rcs-4A-vHb"/>
+                        <outlet property="button4" destination="7bi-vh-ptY" id="uw5-da-OXb"/>
+                        <outlet property="button5" destination="gSa-mS-nxS" id="RsH-GK-ZNr"/>
+                        <outlet property="button6" destination="QVK-l5-I2G" id="A2a-fN-DSx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

@@ -9,6 +9,13 @@
 import UIKit
 
 class ViewController: UIViewController {
+    @IBOutlet fileprivate weak var button1: RoundBorderedButton!
+    @IBOutlet fileprivate weak var button2: RoundBorderedButton!
+    @IBOutlet fileprivate weak var button3: RoundBorderedButton!
+    @IBOutlet fileprivate weak var button4: RoundBorderedButton!
+    @IBOutlet fileprivate weak var button5: RoundBorderedButton!
+    @IBOutlet fileprivate weak var button6: RoundBorderedButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
