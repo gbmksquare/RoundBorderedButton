@@ -9,10 +9,10 @@
 import UIKit
 
 @IBDesignable class RoundBorderedButton: UIControl {
-    // MARK: Default value
     fileprivate static let defaultBorderWidth: CGFloat = 2
     
-    // MARK: Property
+    @IBInspectable var borderWidth = RoundBorderedButton.defaultBorderWidth
+    
     @IBInspectable var title: String? {
         didSet {
             if buttonView != nil {
@@ -28,6 +28,29 @@ import UIKit
             }
         }
     }
+    
+    override var isSelected: Bool {
+        willSet {
+            if newValue == true {
+                showSelectedView()
+            } else {
+                hideSelectedView()
+            }
+        }
+    }
+    
+    fileprivate var selectedBackgroundView: UIView?
+    fileprivate var selectedContainerView: UIView?
+    fileprivate var selectedTitleLabel: UILabel?
+    fileprivate var selectedImageView: UIImageView?
+    fileprivate var selectedContainerMaskView: UIView?
+    
+    fileprivate var showSelectedViewDuration = 0.75
+    fileprivate var showSelectedViewDamping: CGFloat = 0.6
+    fileprivate var showSelectedViewVelocity: CGFloat = 0.9
+    fileprivate var hideSelectedViewDuration = 0.3
+    fileprivate var hideSelectedViewDamping: CGFloat = 0.9
+    fileprivate var hideSelectedViewVelocity: CGFloat = 0.9
     
     // MARK: Initialization
     override init(frame: CGRect) {
@@ -86,7 +109,6 @@ import UIKit
                 self.titleLabel = subview.titleLabel
                 self.imageView = subview.imageView
             }
-        default: return
         }
         
         addSelectedView()
@@ -98,8 +120,6 @@ import UIKit
     }
     
     // MARK: Apperance
-    @IBInspectable var borderWidth = RoundBorderedButton.defaultBorderWidth
-    
     override func tintColorDidChange() {
         super.tintColorDidChange()
         
@@ -117,29 +137,6 @@ import UIKit
     }
     
     // MARK: Selected state
-    fileprivate var selectedBackgroundView: UIView?
-    fileprivate var selectedContainerView: UIView?
-    fileprivate var selectedTitleLabel: UILabel?
-    fileprivate var selectedImageView: UIImageView?
-    fileprivate var selectedContainerMaskView: UIView?
-    
-    fileprivate var showSelectedViewDuration = 0.75
-    fileprivate var showSelectedViewDamping: CGFloat = 0.6
-    fileprivate var showSelectedViewVelocity: CGFloat = 0.9
-    fileprivate var hideSelectedViewDuration = 0.3
-    fileprivate var hideSelectedViewDamping: CGFloat = 0.9
-    fileprivate var hideSelectedViewVelocity: CGFloat = 0.9
-    
-    override var isSelected: Bool {
-        willSet {
-            if newValue == true {
-                showSelectedView()
-            } else {
-                hideSelectedView()
-            }
-        }
-    }
-    
     fileprivate func addSelectedView() {
         func addSelectedBacgroundView() {
             let selectedBackgroundView = UIView(frame: CGRect.zero)
@@ -187,7 +184,6 @@ import UIKit
                 subviews.imageView.tintColor = UIColor.white
                 self.titleLabel = subviews.titleLabel
                 self.imageView = subviews.imageView
-            default: return
             }
         }
         
