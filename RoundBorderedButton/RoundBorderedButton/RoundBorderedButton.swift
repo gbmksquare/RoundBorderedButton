@@ -39,6 +39,17 @@ import UIKit
         }
     }
     
+    override func tintColorDidChange() {
+        super.tintColorDidChange()
+        
+        buttonView?.layer.borderColor = tintColor.cgColor
+        titleLabel?.textColor = tintColor
+    }
+    
+    fileprivate var buttonView: UIView?
+    var titleLabel: UILabel?
+    var imageView: UIImageView?
+    
     fileprivate var selectedBackgroundView: UIView?
     fileprivate var selectedContainerView: UIView?
     fileprivate var selectedTitleLabel: UILabel?
@@ -71,20 +82,14 @@ import UIKit
     }
     
     // MARK: Button
-    fileprivate var buttonView: UIView?
-    var titleLabel: UILabel?
-    var imageView: UIImageView?
-    
     fileprivate func addButtonView() {
         let button = UIView(frame: CGRect.zero)
         button.backgroundColor = UIColor.clear
         button.layer.borderWidth = borderWidth
         button.layer.borderColor = tintColor.cgColor
         button.layer.cornerRadius = bounds.width / 2
-        addSubview(button)
+        self.addToFitInside(subview: button)
         buttonView = button
-        
-        addConstraintsFor(button, toFitInside: self)
         layoutIfNeeded()
     }
     
@@ -119,14 +124,6 @@ import UIKit
         }
     }
     
-    // MARK: Apperance
-    override func tintColorDidChange() {
-        super.tintColorDidChange()
-        
-        buttonView?.layer.borderColor = tintColor.cgColor
-        titleLabel?.textColor = tintColor
-    }
-    
     // MARK: Touch
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         if self.point(inside: point, with: event) == true {
@@ -142,10 +139,8 @@ import UIKit
             let selectedBackgroundView = UIView(frame: CGRect.zero)
             selectedBackgroundView.backgroundColor = tintColor
             selectedBackgroundView.layer.cornerRadius = bounds.width / 2
-            buttonView?.addSubview(selectedBackgroundView)
+            buttonView?.addToEqualSize(subview: selectedBackgroundView)
             self.selectedBackgroundView = selectedBackgroundView
-            
-            addConstraintsFor(selectedBackgroundView, toEqualSizeOf: buttonView!)
         }
         
         func addSelectedContainerView() {
@@ -162,10 +157,8 @@ import UIKit
             selectedContainerView.tag = 1
             selectedContainerView.backgroundColor = UIColor.clear
             selectedContainerView.mask = selectedContainerMaskView
-            buttonView?.addSubview(selectedContainerView)
+            buttonView?.addToEqualSize(subview: selectedContainerView)
             self.selectedContainerView = selectedContainerView
-            
-            addConstraintsFor(selectedContainerView, toEqualSizeOf: buttonView!)
             layoutIfNeeded()
             
             switch (title, image) {
@@ -209,7 +202,7 @@ import UIKit
         imageView?.tintColor = tintColor
         buttonView?.layer.borderColor = tintColor.cgColor
         
-         return snapshot
+        return snapshot
     }
     
     fileprivate func setSelectedViewToVisibleState() {
@@ -231,10 +224,10 @@ import UIKit
         isUserInteractionEnabled = false
         
         UIView.animate(withDuration: showSelectedViewDuration, delay: 0,
-            usingSpringWithDamping: showSelectedViewDamping, initialSpringVelocity: showSelectedViewVelocity,
-            options: UIViewAnimationOptions.curveLinear,
-            animations: { () -> Void in
-                self.setSelectedViewToVisibleState()
+                       usingSpringWithDamping: showSelectedViewDamping, initialSpringVelocity: showSelectedViewVelocity,
+                       options: UIViewAnimationOptions.curveLinear,
+                       animations: { () -> Void in
+                        self.setSelectedViewToVisibleState()
         }) { (finished) -> Void in
             self.isUserInteractionEnabled = true
         }
@@ -245,10 +238,10 @@ import UIKit
         isUserInteractionEnabled = false
         
         UIView.animate(withDuration: hideSelectedViewDuration, delay: 0,
-            usingSpringWithDamping: hideSelectedViewDamping, initialSpringVelocity: hideSelectedViewVelocity,
-            options: UIViewAnimationOptions.curveLinear,
-            animations: { () -> Void in
-                self.setSelectedViewToHiddenState()
+                       usingSpringWithDamping: hideSelectedViewDamping, initialSpringVelocity: hideSelectedViewVelocity,
+                       options: UIViewAnimationOptions.curveLinear,
+                       animations: { () -> Void in
+                        self.setSelectedViewToHiddenState()
         }) { (finished) -> Void in
             self.isUserInteractionEnabled = true
         }
@@ -260,9 +253,7 @@ import UIKit
         titleLabel.text = title
         titleLabel.textColor = tintColor
         titleLabel.textAlignment = NSTextAlignment.center
-        superview.addSubview(titleLabel)
-        
-        addConstraintsFor(titleLabel, toEqualSizeOf: buttonView!)
+        superview.addToEqualSize(subview: titleLabel)
         
         return titleLabel
     }
@@ -272,9 +263,7 @@ import UIKit
         imageView.image = image
         imageView.contentMode = UIViewContentMode.center
         imageView.clipsToBounds = true
-        superview.addSubview(imageView)
-        
-        addConstraintFor(imageView, toFitInsideRound: buttonView!)
+        superview.addToFitInsideRound(subview: imageView)
         
         return imageView
     }
@@ -283,9 +272,8 @@ import UIKit
         let containerView = UIView(frame: CGRect.zero)
         containerView.tag = 1
         containerView.backgroundColor = UIColor.clear
-        superview.addSubview(containerView)
         
-        addConstraintFor(containerView, toFitInsideRound: buttonView!)
+        superview.addToFitInsideRound(subview: containerView)
         layoutIfNeeded()
         
         let containerWidth = sqrt(2) / 2 * bounds.width
@@ -300,9 +288,7 @@ import UIKit
         imageView.image = image
         imageView.contentMode = UIViewContentMode.center
         imageView.clipsToBounds = true
-        containerView.addSubview(imageView)
-        
-        addConstraintFor(imageView, lowerSubview: titleLabel, superview: containerView, lowerViewRatio: 0.33)
+        containerView.add(upperSubview: imageView, lowerSubview: titleLabel, lowerViewRatio: 0.33)
         
         return (containerView, titleLabel, imageView)
     }
@@ -321,99 +307,52 @@ import UIKit
         titleLabel = nil
         imageView = nil
     }
-    
-    // MARK: Auto layout helper
-    fileprivate func addConstraintsFor(_ subview: UIView, toEqualSizeOf superview: UIView) {
-        let topConstraint = NSLayoutConstraint(item: subview, attribute: NSLayoutAttribute.top,
-            relatedBy: NSLayoutRelation.equal,
-            toItem: superview, attribute: NSLayoutAttribute.top,
-            multiplier: 1, constant: 0)
-        let bottomConstraint = NSLayoutConstraint(item: subview, attribute: NSLayoutAttribute.bottom,
-            relatedBy: NSLayoutRelation.equal,
-            toItem: superview, attribute: NSLayoutAttribute.bottom,
-            multiplier: 1, constant: 0)
-        let leftConstraint = NSLayoutConstraint(item: subview, attribute: NSLayoutAttribute.left,
-            relatedBy: NSLayoutRelation.equal,
-            toItem: superview, attribute: NSLayoutAttribute.left,
-            multiplier: 1, constant: 0)
-        let rightConstraint = NSLayoutConstraint(item: subview, attribute: NSLayoutAttribute.right,
-            relatedBy: NSLayoutRelation.equal,
-            toItem: superview, attribute: NSLayoutAttribute.right,
-            multiplier: 1, constant: 0)
+}
+
+extension UIView {
+    fileprivate func addToEqualSize(subview: UIView) {
+        addSubview(subview)
         subview.translatesAutoresizingMaskIntoConstraints = false
-        superview.addConstraints([topConstraint, bottomConstraint, leftConstraint, rightConstraint])
+        subview.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        subview.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        subview.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        subview.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
     
-    fileprivate func addConstraintsFor(_ subview: UIView, toFitInside superview: UIView) {
-        let fittingWidth = superview.bounds.width > superview.bounds.height ? superview.bounds.height : superview.bounds.width
-        addConstraintFor(subview, toFitInsde: superview, width: fittingWidth)
+    fileprivate func addToFitInside(subview: UIView) {
+        let fittingWidth = bounds.width > bounds.height ? bounds.height : bounds.width
+        add(subview: subview, toFitWidth: fittingWidth)
     }
     
-    fileprivate func addConstraintFor(_ subview: UIView, toFitInsideRound superview: UIView) {
-        let fittingWidth = sqrt(2) / 2 * superview.bounds.width
-        addConstraintFor(subview, toFitInsde: superview, width: fittingWidth)
+    fileprivate func addToFitInsideRound(subview: UIView) {
+        let fittingWidth = sqrt(2) / 2 * bounds.width
+        add(subview: subview, toFitWidth: fittingWidth)
     }
     
-    fileprivate func addConstraintFor(_ subview: UIView, toFitInsde superview: UIView, width: CGFloat) {
-        let widthConstraint = NSLayoutConstraint(item: subview, attribute: NSLayoutAttribute.width,
-            relatedBy: NSLayoutRelation.equal,
-            toItem: nil, attribute: NSLayoutAttribute.notAnAttribute,
-            multiplier: 1, constant: width)
-        let ratioConstraint = NSLayoutConstraint(item: subview, attribute: NSLayoutAttribute.height,
-            relatedBy: NSLayoutRelation.equal,
-            toItem: subview, attribute: NSLayoutAttribute.width,
-            multiplier: 1, constant: 0)
-        let verticalConstraint = NSLayoutConstraint(item: subview, attribute: NSLayoutAttribute.centerY,
-            relatedBy: NSLayoutRelation.equal,
-            toItem: superview, attribute: NSLayoutAttribute.centerY,
-            multiplier: 1, constant: 0)
-        let horizontalConstraint = NSLayoutConstraint(item: subview, attribute: NSLayoutAttribute.centerX,
-            relatedBy: NSLayoutRelation.equal,
-            toItem: superview, attribute: NSLayoutAttribute.centerX,
-            multiplier: 1, constant: 0)
+    private func add(subview: UIView, toFitWidth width: CGFloat) {
+        addSubview(subview)
         subview.translatesAutoresizingMaskIntoConstraints = false
-        superview.addConstraints([widthConstraint, ratioConstraint, verticalConstraint, horizontalConstraint])
+        subview.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        subview.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        subview.widthAnchor.constraint(equalToConstant: width).isActive = true
+        subview.heightAnchor.constraint(equalTo: subview.widthAnchor).isActive = true
     }
     
-    fileprivate func addConstraintFor(_ upperSubview: UIView, lowerSubview: UIView, superview: UIView, lowerViewRatio: CGFloat) {
-        let lowerViewHeight = superview.bounds.height * lowerViewRatio
+    fileprivate func add(upperSubview: UIView, lowerSubview: UIView, lowerViewRatio: CGFloat) {
+        addSubview(upperSubview)
+        addSubview(lowerSubview)
         
-        let upperViewTopConstraint = NSLayoutConstraint(item: upperSubview, attribute: NSLayoutAttribute.top,
-            relatedBy: NSLayoutRelation.equal,
-            toItem: superview, attribute: NSLayoutAttribute.top,
-            multiplier: 1, constant: 0)
-        let upperViewBottomConstraint = NSLayoutConstraint(item: upperSubview, attribute: NSLayoutAttribute.bottom,
-            relatedBy: NSLayoutRelation.equal,
-            toItem: lowerSubview, attribute: NSLayoutAttribute.top,
-            multiplier: 1, constant: 0)
-        let upperViewLeftConstraint = NSLayoutConstraint(item: upperSubview, attribute: NSLayoutAttribute.left,
-            relatedBy: NSLayoutRelation.equal,
-            toItem: superview, attribute: NSLayoutAttribute.left,
-            multiplier: 1, constant: 0)
-        let upperViewRightConstraint = NSLayoutConstraint(item: upperSubview, attribute: NSLayoutAttribute.right,
-            relatedBy: NSLayoutRelation.equal,
-            toItem: superview, attribute: NSLayoutAttribute.right,
-            multiplier: 1, constant: 0)
         upperSubview.translatesAutoresizingMaskIntoConstraints = false
-        superview.addConstraints([upperViewTopConstraint, upperViewBottomConstraint, upperViewLeftConstraint, upperViewRightConstraint])
+        upperSubview.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        upperSubview.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        upperSubview.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        upperSubview.bottomAnchor.constraint(equalTo: lowerSubview.topAnchor).isActive = true
         
-        let lowerViewHeightConstraint = NSLayoutConstraint(item: lowerSubview, attribute: NSLayoutAttribute.height,
-            relatedBy: NSLayoutRelation.equal,
-            toItem: nil, attribute: NSLayoutAttribute.notAnAttribute,
-            multiplier: 1, constant: lowerViewHeight)
-        let lowerViewBottomConstraint = NSLayoutConstraint(item: lowerSubview, attribute: NSLayoutAttribute.bottom,
-            relatedBy: NSLayoutRelation.equal,
-            toItem: superview, attribute: NSLayoutAttribute.bottom,
-            multiplier: 1, constant: 0)
-        let lowerViewLeftConstraint = NSLayoutConstraint(item: lowerSubview, attribute: NSLayoutAttribute.left,
-            relatedBy: NSLayoutRelation.equal,
-            toItem: superview, attribute: NSLayoutAttribute.left,
-            multiplier: 1, constant: 0)
-        let lowerViewRightConstraint = NSLayoutConstraint(item: lowerSubview, attribute: NSLayoutAttribute.right,
-            relatedBy: NSLayoutRelation.equal,
-            toItem: superview, attribute: NSLayoutAttribute.right,
-            multiplier: 1, constant: 0)
+        let lowerViewHeight = bounds.height * lowerViewRatio
         lowerSubview.translatesAutoresizingMaskIntoConstraints = false
-        superview.addConstraints([lowerViewHeightConstraint, lowerViewBottomConstraint, lowerViewLeftConstraint, lowerViewRightConstraint])
+        lowerSubview.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        lowerSubview.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        lowerSubview.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        lowerSubview.heightAnchor.constraint(equalToConstant: lowerViewHeight).isActive = true
     }
 }
