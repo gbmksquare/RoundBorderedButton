@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -85,9 +84,6 @@
                                 <rect key="frame" x="78" y="220" width="60" height="60"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="0.94509803920000002" green="0.36470588240000001" blue="0.36470588240000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="7bi-vh-ptY" secondAttribute="height" multiplier="1:1" id="qGR-zp-Ruh"/>
-                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="image" keyPath="image" value="glypish-914-skull-and-crossbones"/>
                                 </userDefinedRuntimeAttributes>
@@ -100,7 +96,6 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="0.40784313729999999" green="0.75686274509999996" blue="0.74117647060000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="gSa-mS-nxS" secondAttribute="height" multiplier="1:1" id="1ak-Ao-bGh"/>
                                     <constraint firstAttribute="width" constant="60" id="NMk-Gy-ZrA"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -110,27 +105,122 @@
                                     <action selector="tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="S6h-Ib-vkk"/>
                                 </connections>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j6x-nO-B8m" customClass="RoundBorderedButton" customModule="RoundBorderedButton" customModuleProvider="target">
+                                <rect key="frame" x="257.5" y="323" width="100" height="67"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.80000000000000004" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="DANGER"/>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="glypish-914-skull-and-crossbones"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gT2-WQ-2R9"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lnD-9W-CBg" customClass="RoundBorderedButton" customModule="RoundBorderedButton" customModuleProvider="target">
+                                <rect key="frame" x="17.5" y="331.5" width="100" height="50"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="glypish-914-skull-and-crossbones"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mlX-jh-3Nj"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wg7-hc-t3C" customClass="RoundBorderedButton" customModule="RoundBorderedButton" customModuleProvider="target">
+                                <rect key="frame" x="137.5" y="340" width="100" height="33.5"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="ifH-oc-lHe"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="DANGER"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JNg-Wk-8hU"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jDT-EF-3Yb" customClass="RoundBorderedButton" customModule="RoundBorderedButton" customModuleProvider="target">
+                                <rect key="frame" x="237.5" y="478.5" width="60" height="90"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.20000000000000001" green="0.40000000000000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="DANGER"/>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="glypish-914-skull-and-crossbones"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OFY-Re-fag"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dfp-2w-WYd" customClass="RoundBorderedButton" customModule="RoundBorderedButton" customModuleProvider="target">
+                                <rect key="frame" x="77.5" y="464" width="60" height="120"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.0" green="0.20000000000000001" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="glypish-914-skull-and-crossbones"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="J4a-HW-rIR"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9H3-5x-uNO" customClass="RoundBorderedButton" customModule="RoundBorderedButton" customModuleProvider="target">
+                                <rect key="frame" x="157.5" y="433.5" width="60" height="180"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="1" green="1" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="CU3-8P-gOB"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="DANGER"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bIX-hv-UkC"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="1I7-Yb-zFn" firstAttribute="leading" secondItem="bVf-F3-Suk" secondAttribute="trailing" constant="20" id="1Gj-cc-GRb"/>
                             <constraint firstItem="bVf-F3-Suk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4LR-ub-QqW"/>
+                            <constraint firstItem="Wg7-hc-t3C" firstAttribute="top" secondItem="gSa-mS-nxS" secondAttribute="bottom" constant="60" id="4s2-eU-uSo"/>
+                            <constraint firstItem="9H3-5x-uNO" firstAttribute="width" secondItem="Dfp-2w-WYd" secondAttribute="width" id="5I2-qS-2G0"/>
+                            <constraint firstItem="9H3-5x-uNO" firstAttribute="centerY" secondItem="Dfp-2w-WYd" secondAttribute="centerY" id="6SO-g9-LJO"/>
+                            <constraint firstItem="j6x-nO-B8m" firstAttribute="centerY" secondItem="lnD-9W-CBg" secondAttribute="centerY" id="6a2-UG-YX1"/>
                             <constraint firstItem="7bi-vh-ptY" firstAttribute="width" secondItem="7bi-vh-ptY" secondAttribute="height" multiplier="1:1" id="7HH-rt-v0o"/>
+                            <constraint firstItem="Wg7-hc-t3C" firstAttribute="leading" secondItem="lnD-9W-CBg" secondAttribute="trailing" constant="20" id="7Iw-cE-ejI"/>
                             <constraint firstItem="QVK-l5-I2G" firstAttribute="leading" secondItem="gSa-mS-nxS" secondAttribute="trailing" constant="20" id="7bu-97-b2F"/>
+                            <constraint firstItem="9H3-5x-uNO" firstAttribute="width" secondItem="9H3-5x-uNO" secondAttribute="height" multiplier="1:3" id="ADH-kA-aEe"/>
                             <constraint firstItem="gSa-mS-nxS" firstAttribute="width" secondItem="7bi-vh-ptY" secondAttribute="width" id="Al4-wq-jC8"/>
                             <constraint firstItem="1I7-Yb-zFn" firstAttribute="top" secondItem="UER-44-u6e" secondAttribute="top" id="CUi-fJ-s5f"/>
                             <constraint firstItem="QVK-l5-I2G" firstAttribute="width" secondItem="7bi-vh-ptY" secondAttribute="width" id="EEW-Mm-rpH"/>
                             <constraint firstItem="QVK-l5-I2G" firstAttribute="top" secondItem="7bi-vh-ptY" secondAttribute="top" id="Gwz-G8-fut"/>
                             <constraint firstItem="gSa-mS-nxS" firstAttribute="leading" secondItem="7bi-vh-ptY" secondAttribute="trailing" constant="20" id="H6H-K3-Ka9"/>
+                            <constraint firstItem="Wg7-hc-t3C" firstAttribute="width" secondItem="Wg7-hc-t3C" secondAttribute="height" multiplier="3:1" id="KBX-8U-Brt"/>
+                            <constraint firstItem="Wg7-hc-t3C" firstAttribute="centerY" secondItem="lnD-9W-CBg" secondAttribute="centerY" id="KEf-hp-7fp"/>
+                            <constraint firstItem="9H3-5x-uNO" firstAttribute="leading" secondItem="Dfp-2w-WYd" secondAttribute="trailing" constant="20" id="LaS-rv-Tdb"/>
+                            <constraint firstItem="Wg7-hc-t3C" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="MJQ-ZC-lRv"/>
+                            <constraint firstItem="jDT-EF-3Yb" firstAttribute="centerY" secondItem="Dfp-2w-WYd" secondAttribute="centerY" id="O7X-oz-E6F"/>
                             <constraint firstItem="gSa-mS-nxS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Rrp-Wo-NFe"/>
+                            <constraint firstItem="Wg7-hc-t3C" firstAttribute="width" secondItem="lnD-9W-CBg" secondAttribute="width" id="TBh-Yr-V1T"/>
+                            <constraint firstItem="jDT-EF-3Yb" firstAttribute="leading" secondItem="9H3-5x-uNO" secondAttribute="trailing" constant="20" id="Uon-aN-Zj7"/>
                             <constraint firstItem="bVf-F3-Suk" firstAttribute="top" secondItem="UER-44-u6e" secondAttribute="top" id="Wts-wU-weI"/>
                             <constraint firstItem="gSa-mS-nxS" firstAttribute="top" secondItem="bVf-F3-Suk" secondAttribute="bottom" constant="60" id="XYS-zd-FS2"/>
-                            <constraint firstItem="QVK-l5-I2G" firstAttribute="width" secondItem="QVK-l5-I2G" secondAttribute="height" multiplier="1:1" id="YZy-8o-zqH"/>
+                            <constraint firstItem="Dfp-2w-WYd" firstAttribute="width" secondItem="Dfp-2w-WYd" secondAttribute="height" multiplier="1:2" id="ZAz-zl-ioJ"/>
                             <constraint firstItem="gSa-mS-nxS" firstAttribute="width" secondItem="gSa-mS-nxS" secondAttribute="height" multiplier="1:1" id="axO-Tc-uL2"/>
+                            <constraint firstItem="j6x-nO-B8m" firstAttribute="width" secondItem="j6x-nO-B8m" secondAttribute="height" multiplier="1.5:1" id="bMy-tm-CVU"/>
                             <constraint firstItem="bVf-F3-Suk" firstAttribute="leading" secondItem="UER-44-u6e" secondAttribute="trailing" constant="20" id="cdh-wq-FAW"/>
                             <constraint firstItem="bVf-F3-Suk" firstAttribute="width" secondItem="UER-44-u6e" secondAttribute="width" id="cm6-lh-2gZ"/>
+                            <constraint firstItem="j6x-nO-B8m" firstAttribute="width" secondItem="lnD-9W-CBg" secondAttribute="width" id="e9B-Ux-4v9"/>
+                            <constraint firstItem="j6x-nO-B8m" firstAttribute="leading" secondItem="Wg7-hc-t3C" secondAttribute="trailing" constant="20" id="fuo-vl-vZ2"/>
                             <constraint firstItem="bVf-F3-Suk" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="40" id="jHO-oI-7bm"/>
+                            <constraint firstItem="jDT-EF-3Yb" firstAttribute="width" secondItem="Dfp-2w-WYd" secondAttribute="width" id="jyj-HO-A0E"/>
+                            <constraint firstItem="9H3-5x-uNO" firstAttribute="top" secondItem="Wg7-hc-t3C" secondAttribute="bottom" constant="60" id="k1N-xq-2ba"/>
+                            <constraint firstItem="9H3-5x-uNO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="lkI-R5-ugu"/>
+                            <constraint firstItem="lnD-9W-CBg" firstAttribute="width" secondItem="lnD-9W-CBg" secondAttribute="height" multiplier="2:1" id="uFv-y9-bFF"/>
                             <constraint firstItem="1I7-Yb-zFn" firstAttribute="width" secondItem="UER-44-u6e" secondAttribute="width" id="ue4-eP-EQC"/>
+                            <constraint firstItem="jDT-EF-3Yb" firstAttribute="width" secondItem="jDT-EF-3Yb" secondAttribute="height" multiplier="1:1.5" id="xD8-os-0a2"/>
                             <constraint firstItem="gSa-mS-nxS" firstAttribute="top" secondItem="7bi-vh-ptY" secondAttribute="top" id="ykU-W7-nuK"/>
                         </constraints>
                     </view>

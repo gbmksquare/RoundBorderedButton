@@ -89,7 +89,7 @@ import UIKit
         button.backgroundColor = UIColor.clear
         button.layer.borderWidth = borderWidth
         button.layer.borderColor = tintColor.cgColor
-        button.layer.cornerRadius = bounds.width / 2
+        button.layer.cornerRadius = bounds.width >= bounds.height ? bounds.height / 2 : bounds.width / 2
         self.addToFitInside(subview: button)
         buttonView = button
         layoutIfNeeded()
@@ -140,7 +140,7 @@ import UIKit
         func addSelectedBacgroundView() {
             let selectedBackgroundView = UIView(frame: CGRect.zero)
             selectedBackgroundView.backgroundColor = tintColor
-            selectedBackgroundView.layer.cornerRadius = bounds.width / 2
+            selectedBackgroundView.layer.cornerRadius = bounds.width >= bounds.height ? bounds.height / 2 : bounds.width / 2
             buttonView?.addToEqualSize(subview: selectedBackgroundView)
             self.selectedBackgroundView = selectedBackgroundView
         }
@@ -148,7 +148,7 @@ import UIKit
         func addSelectedContainerView() {
             let selectedContainerMaskView = UIView(frame: buttonView!.bounds)
             selectedContainerMaskView.backgroundColor = UIColor.black
-            selectedContainerMaskView.layer.cornerRadius = buttonView!.bounds.width / 2
+            selectedContainerMaskView.layer.cornerRadius = buttonView!.bounds.width >= buttonView!.bounds.height ? buttonView!.bounds.height / 2 : buttonView!.bounds.width / 2
             self.selectedContainerMaskView = selectedContainerMaskView
             
             if let selectedContainerView = self.selectedContainerView {
