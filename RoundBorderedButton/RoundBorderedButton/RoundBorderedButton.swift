@@ -9,14 +9,13 @@
 import UIKit
 
 @IBDesignable class RoundBorderedButton: UIControl {
-    fileprivate static let defaultBorderWidth: CGFloat = 2
-    
-    @IBInspectable var borderWidth = RoundBorderedButton.defaultBorderWidth
+    // MARK: Settings
+    @IBInspectable var borderWidth: CGFloat = 2
     
     @IBInspectable var title: String? {
         didSet {
             if buttonView != nil {
-                addTitleAndImageView()
+                updateView()
             }
         }
     }
@@ -24,7 +23,7 @@ import UIKit
     @IBInspectable var image: UIImage? {
         didSet {
             if buttonView != nil {
-                addTitleAndImageView()
+                updateView()
             }
         }
     }
@@ -32,12 +31,21 @@ import UIKit
     override var isSelected: Bool {
         willSet {
             if newValue == true {
-                showSelectedView()
+                select()
             } else {
-                hideSelectedView()
+                deselect()
             }
         }
     }
+    
+    @IBInspectable var selectAnimationDuration = 0.75
+    @IBInspectable var selectAnimationDaming: CGFloat = 0.6
+    @IBInspectable var selectAnimationVelocity: CGFloat = 0.9
+    fileprivate var selectBackgroundAlpha: CGFloat = 1.0
+    @IBInspectable var deselectAnimationDuration = 0.3
+    @IBInspectable var deselectAnimationDaming: CGFloat = 0.9
+    @IBInspectable var deselectAnimationVelocity: CGFloat = 0.9
+    fileprivate var deselectBackgroundAlpha: CGFloat = 0.0
     
     override func tintColorDidChange() {
         super.tintColorDidChange()
@@ -46,6 +54,7 @@ import UIKit
         titleLabel?.textColor = tintColor
     }
     
+    // MARK: - User interface
     fileprivate var buttonView: UIView?
     var titleLabel: UILabel?
     var imageView: UIImageView?
@@ -55,13 +64,6 @@ import UIKit
     fileprivate var selectedTitleLabel: UILabel?
     fileprivate var selectedImageView: UIImageView?
     fileprivate var selectedContainerMaskView: UIView?
-    
-    fileprivate var showSelectedViewDuration = 0.75
-    fileprivate var showSelectedViewDamping: CGFloat = 0.6
-    fileprivate var showSelectedViewVelocity: CGFloat = 0.9
-    fileprivate var hideSelectedViewDuration = 0.3
-    fileprivate var hideSelectedViewDamping: CGFloat = 0.9
-    fileprivate var hideSelectedViewVelocity: CGFloat = 0.9
     
     // MARK: Initialization
     override init(frame: CGRect) {
@@ -77,7 +79,7 @@ import UIKit
         
         if buttonView == nil {
             addButtonView()
-            addTitleAndImageView()
+            updateView()
         }
     }
     
@@ -93,7 +95,7 @@ import UIKit
         layoutIfNeeded()
     }
     
-    fileprivate func addTitleAndImageView() {
+    fileprivate func updateView() {
         removeSubviewsFor(buttonView!)
         
         switch (title, image) {
@@ -118,9 +120,9 @@ import UIKit
         
         addSelectedView()
         if isSelected == true {
-            showSelectedView()
+            select()
         } else {
-            hideSelectedView()
+            deselect()
         }
     }
     
@@ -204,50 +206,10 @@ import UIKit
         
         return snapshot
     }
-    
-    fileprivate func setSelectedViewToVisibleState() {
-        selectedBackgroundView?.alpha = 1
-        selectedBackgroundView?.transform = CGAffineTransform.identity
-        selectedContainerMaskView?.transform = CGAffineTransform.identity
-        selectedContainerView?.isHidden = false
-    }
-    
-    fileprivate func setSelectedViewToHiddenState() {
-        selectedBackgroundView?.alpha = 0
-        selectedBackgroundView?.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
-        selectedContainerMaskView?.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
-        selectedContainerView?.isHidden = true
-    }
-    
-    fileprivate func showSelectedView() {
-        setSelectedViewToHiddenState()
-        isUserInteractionEnabled = false
-        
-        UIView.animate(withDuration: showSelectedViewDuration, delay: 0,
-                       usingSpringWithDamping: showSelectedViewDamping, initialSpringVelocity: showSelectedViewVelocity,
-                       options: UIViewAnimationOptions.curveLinear,
-                       animations: { () -> Void in
-                        self.setSelectedViewToVisibleState()
-        }) { (finished) -> Void in
-            self.isUserInteractionEnabled = true
-        }
-    }
-    
-    fileprivate func hideSelectedView() {
-        setSelectedViewToVisibleState()
-        isUserInteractionEnabled = false
-        
-        UIView.animate(withDuration: hideSelectedViewDuration, delay: 0,
-                       usingSpringWithDamping: hideSelectedViewDamping, initialSpringVelocity: hideSelectedViewVelocity,
-                       options: UIViewAnimationOptions.curveLinear,
-                       animations: { () -> Void in
-                        self.setSelectedViewToHiddenState()
-        }) { (finished) -> Void in
-            self.isUserInteractionEnabled = true
-        }
-    }
-    
-    // MARK: Add subview helper
+}
+
+extension RoundBorderedButton {
+    // MARK: - Subview
     func addTitleViewTo(_ superview: UIView) -> UILabel {
         let titleLabel = UILabel(frame: CGRect.zero)
         titleLabel.text = title
@@ -293,7 +255,7 @@ import UIKit
         return (containerView, titleLabel, imageView)
     }
     
-    func removeSubviewsFor(_ view: UIView) {
+    fileprivate func removeSubviewsFor(_ view: UIView) {
         for view in view.subviews {
             if view.tag == 1 {
                 for subview in view.subviews {
@@ -306,6 +268,53 @@ import UIKit
         imageView?.removeFromSuperview()
         titleLabel = nil
         imageView = nil
+    }
+}
+
+extension RoundBorderedButton {
+    // MARK: - Selection
+    fileprivate func select() {
+        setToDeselectionState()
+        isUserInteractionEnabled = false
+        
+        UIView.animate(withDuration: selectAnimationDuration, delay: 0,
+                       usingSpringWithDamping: selectAnimationDaming,
+                       initialSpringVelocity: selectAnimationVelocity,
+                       options: UIViewAnimationOptions.curveLinear,
+                       animations: { () -> Void in
+                        self.setToSelectionState()
+        }) { (finished) -> Void in
+            self.isUserInteractionEnabled = true
+        }
+    }
+    
+    fileprivate func deselect() {
+        setToSelectionState()
+        isUserInteractionEnabled = false
+        
+        UIView.animate(withDuration: deselectAnimationDuration, delay: 0,
+                       usingSpringWithDamping: deselectAnimationDaming,
+                       initialSpringVelocity: deselectAnimationVelocity,
+                       options: UIViewAnimationOptions.curveLinear,
+                       animations: { () -> Void in
+                        self.setToDeselectionState()
+        }) { (finished) -> Void in
+            self.isUserInteractionEnabled = true
+        }
+    }
+    
+    private func setToSelectionState() {
+        selectedBackgroundView?.alpha = selectBackgroundAlpha
+        selectedBackgroundView?.transform = CGAffineTransform.identity
+        selectedContainerMaskView?.transform = CGAffineTransform.identity
+        selectedContainerView?.isHidden = false
+    }
+    
+    private func setToDeselectionState() {
+        selectedBackgroundView?.alpha = deselectBackgroundAlpha
+        selectedBackgroundView?.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+        selectedContainerMaskView?.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+        selectedContainerView?.isHidden = true
     }
 }
 
