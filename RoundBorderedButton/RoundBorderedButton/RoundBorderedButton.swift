@@ -1,6 +1,6 @@
 //
-//  RoundBorderedButton.swift
-//  RoundBorderedButton
+//  GBMRoundBorderedButton.swift
+//  GBMRoundBorderedButton
 //
 //  Created by 구범모 on 2015. 4. 10..
 //  Copyright (c) 2015년 gbmKSquare. All rights reserved.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-@IBDesignable class RoundBorderedButton: UIControl {
+@IBDesignable class GBMRoundBorderedButton: UIControl {
     // MARK: Settings
     @IBInspectable var borderWidth: CGFloat = 2
     
@@ -208,7 +208,7 @@ import UIKit
     }
 }
 
-extension RoundBorderedButton {
+extension GBMRoundBorderedButton {
     // MARK: - Subview
     func addTitleViewTo(_ superview: UIView) -> UILabel {
         let titleLabel = UILabel(frame: CGRect.zero)
@@ -271,7 +271,7 @@ extension RoundBorderedButton {
     }
 }
 
-extension RoundBorderedButton {
+extension GBMRoundBorderedButton {
     // MARK: - Selection
     fileprivate func select() {
         setToDeselectionState()
